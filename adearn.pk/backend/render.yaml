@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: adearn-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install && npx prisma generate && npx prisma db push
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:./adearn.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET  
+        generateValue: true
+      - key: PEPPER_SECRET
+        value: adearn-pk-hardcoded-pepper-2025-encryption
+      - key: FRONTEND_URL
+        fromService:
+          name: adearn-frontend
+          type: web
+          property: url

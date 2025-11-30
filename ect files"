@@ -1,0 +1,186 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./adearn.db?connection_limit=1"
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  phone       String   @unique
+  name        String
+  password    String
+  totpSecret  String?
+  isVerified  Boolean  @default(false)
+  status      UserStatus @default(pending)
+  role        UserRole @default(user)
+  lastLogin   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  subscription PackageSubscription?
+  adViews      AdViewLog[]
+  payments     PaymentProof[]
+  referrals    Referral[]
+  withdrawals  WithdrawalRequest[]
+  adminLogs    AdminLog[]
+
+  @@map("users")
+}
+
+model PackageSubscription {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  package   PackageType
+  startDate DateTime
+  endDate   DateTime
+  status    SubscriptionStatus @default(active)
+  dailyAds  Int
+  monthlyEarnings Int
+
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("package_subscriptions")
+}
+
+model Ad {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  videoUrl    String
+  duration    Int
+  earnings    Float
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  adViews AdViewLog[]
+
+  @@map("ads")
+}
+
+model AdViewLog {
+  id          String   @id @default(uuid())
+  userId      String
+  adId        String
+  watchedAt   DateTime @default(now())
+  completed   Boolean  @default(false)
+  ipAddress   String
+  userAgent   String
+  cheatAttempt Boolean @default(false)
+  earnings    Float
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ad   Ad   @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+  @@map("ad_view_logs")
+}
+
+model PaymentProof {
+  id          String   @id @default(uuid())
+  userId      String
+  imageUrl    String
+  amount      Float
+  method      PaymentMethod
+  status      PaymentStatus @default(pending)
+  createdAt   DateTime @default(now())
+  reviewedAt  DateTime?
+  reviewedBy  String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payment_proofs")
+}
+
+model Referral {
+  id          String   @id @default(uuid())
+  referrerId  String
+  referredId  String   @unique
+  bonusEarned Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  referrer User @relation(fields: [referrerId], references: [id], onDelete: Cascade)
+  referred User @relation(fields: [referredId], references: [id], onDelete: Cascade)
+
+  @@map("referrals")
+}
+
+model WithdrawalRequest {
+  id          String   @id @default(uuid())
+  userId      String
+  amount      Float
+  method      WithdrawalMethod
+  accountInfo String
+  status      WithdrawalStatus @default(pending)
+  createdAt   DateTime @default(now())
+  processedAt DateTime?
+  processedBy String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("withdrawal_requests")
+}
+
+model AdminLog {
+  id          String   @id @default(uuid())
+  adminId     String
+  action      String
+  targetId    String?
+  details     Json?
+  ipAddress   String
+  userAgent   String
+  createdAt   DateTime @default(now())
+
+  admin User @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("admin_logs")
+}
+
+enum UserStatus {
+  pending
+  active
+  suspended
+}
+
+enum UserRole {
+  user
+  admin
+}
+
+enum PackageType {
+  silver
+  gold
+  platinum
+}
+
+enum SubscriptionStatus {
+  active
+  expired
+  cancelled
+}
+
+enum PaymentMethod {
+  jazzcash
+  easypaisa
+  bank
+}
+
+enum PaymentStatus {
+  pending
+  approved
+  rejected
+}
+
+enum WithdrawalMethod {
+  jazzcash
+  easypaisa
+  bank
+}
+
+enum WithdrawalStatus {
+  pending
+  processed
+  rejected
+}
