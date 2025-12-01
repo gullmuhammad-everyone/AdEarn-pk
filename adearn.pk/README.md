@@ -42,9 +42,9 @@ A complete web application where users pay monthly subscription to watch ads and
 
 | Package | Ads/Day | Monthly Earnings | Price |
 |---------|----------|------------------|--------|
-| Silver | 40 | ₹3,000 | ₹1,000/month |
-| Gold | 80 | ₹6,000 | ₹2,000/month |
-| Platinum | 120 | ₹9,000 | ₹3,000/month |
+| Silver | 40 | RS 3,000 | RS 1,000/month |
+| Gold | 80 | RS 6,000 | RS 2,000/month |
+| Platinum | 120 | RS 9,000 | RS 3,000/month |
 
 ## 🛠️ Tech Stack
 
