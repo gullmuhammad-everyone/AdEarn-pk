@@ -3,29 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdEarn.pk - Coming Soon</title>
+    <title>AdEarn.pk - Watch Ads, Earn Money | Halal & Legal</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px; 
-            background: linear-gradient(135deg, #22c55e, #3b82f6);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #22c55e;
+        }
+        
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #22c55e; }
+        
+        .auth-buttons { display: flex; gap: 1rem; }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: #22c55e;
             color: white;
         }
-        .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
+        .btn-primary:hover { background: #16a34a; transform: translateY(-2px); }
+        
+        .btn-outline {
+            border: 2px solid #22c55e;
+            color: #22c55e;
+            background: transparent;
         }
-        h1 { font-size: 2.5rem; margin-bottom: 20px; }
-        p { font-size: 1.2rem; margin-bottom: 30px; }
+        .btn-outline:hover { background: #22c55e; color: white; }
+        
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
+            color: white;
+            margin-top: 60px;
+        }
+        
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.2; }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Status Indicator */
+        .status {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 400px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🚀 AdEarn.pk</h1>
-        <p>Halal Ad Watching Platform</p>
-        <p><strong>Watch Ads, Earn Money - Coming Soon!</strong></p>
-        <p>Platform is being deployed...</p>
-    </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <span>AdEarn</span>.pk
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#packages">Packages</a>
+                    <a href="#how-it-works">How It Works</a>
+                </div>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🚀 AdEarn.pk is Live!</h1>
+            <p>Your halal ad-watching platform is successfully deployed on Netlify!</p>
+            
+            <div class="status">
+                <strong>Backend Status:</strong> <span id="apiStatus">Checking...</span>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#" class="btn btn-primary" style="background: white; color: #22c55e;">Start Earning Now</a>
+                <a href="#features" class="btn btn-outline" style="border-color: white; color: white;">View Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section style="padding: 80px 0; background: white;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Platform Features</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
+                    <h3>Guaranteed Earnings</h3>
+                    <p>Earn ₹3,000 to ₹9,000 monthly by watching ads</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🕌</div>
+                    <h3>Halal & Legal</h3>
+                    <p>100% Shariah compliant for Pakistani users</p>
+                </div>
+                <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
+                    <h3>Referral Bonus</h3>
+                    <p>Earn ₹500 for each successful referral</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #1f2937; color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <div class="logo" style="justify-content: center; margin-bottom: 2rem; color: white;">
+                <span>AdEarn</span>.pk
+            </div>
+            <p>Successfully deployed on Netlify - 100% Free</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">&copy; 2024 AdEarn.pk. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Test backend connection
+        fetch('/api/health')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('apiStatus').innerHTML = 
+                    '✅ Connected - ' + data.service;
+                document.getElementById('apiStatus').style.color = '#22c55e';
+            })
+            .catch(error => {
+                document.getElementById('apiStatus').innerHTML = 
+                    '❌ Backend offline - Netlify Functions Ready';
+                document.getElementById('apiStatus').style.color = '#ef4444';
+            });
+    </script>
 </body>
 </html>
